@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1589387394 source:d:\program\c++ algorithm\icpc\2019_icpc_asia_taipei-hsinchu_regional\problem_d\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+

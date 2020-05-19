@@ -1,0 +1,92 @@
+#include <iostream>
+#include <bits/stdc++.h>
+#define LOCAL
+using namespace std;
+int m , n ;
+int city[200020] = {} ;
+int visit[200020] = {} ;
+int Maxn_path = 0 , Maxn_city = 0 ;
+int flag = 1 ;
+
+struct node{
+    int x , y ;
+}nodNode[200020];
+vector<int> vecTree ;
+
+void print_tree(int root ){
+    cout << "root= " << root << ' ' ;
+    for(int i = 0 ; i < vecTree.size() ; i++)
+        cout << vecTree[i] << ' ';
+    cout << '\n' ;
+}
+
+void dfs_to_Maxn_path(int root){
+    for(int i = 0 ; i < n ; i++){
+        print_tree(root) ;
+        int x = nodNode[i].x ;
+        int y = nodNode[i].y ;
+        if(x == root && !visit[i] ){
+            visit[i] = 1 ;
+            vecTree.push_back(root);
+            dfs_to_Maxn_path(y);
+            vecTree.pop_back();
+        }
+        if(y == root && !visit[i]){
+            visit[i] = 1 ;
+            vecTree.push_back(root);
+            dfs_to_Maxn_path(x);
+            vecTree.pop_back();
+        }
+    }
+    if(city[root] && Maxn_path < vecTree.size()){
+        Maxn_city = vecTree[vecTree.size()/2] ;
+        Maxn_path = vecTree.size();
+        cout << "Maxn_city= " << Maxn_city << " Maxn_path= " << Maxn_path << '\n' ;
+    }
+}
+
+void dfs_to_other_path(int root ,int path){
+    if(flag == 0)
+        return ;
+    for(int i = 0 ; i < n ; i++){
+        int x = nodNode[i].x ;
+        int y = nodNode[i].y ;
+        if(x == root && !visit[i] ){
+            visit[i] = 1 ;
+            dfs_to_other_path(y , path+1);
+        }
+        if(y == root && !visit[i]){
+            visit[i] = 1 ;
+            vecTree.push_back(root);
+            dfs_to_other_path(x , path+1);
+        }
+    }
+    if(city[root] && Maxn_path != path )
+        flag = 0 ;
+}
+
+int main()
+{
+#ifdef LOCAL
+    freopen("in1.txt" , "r" , stdin );
+#endif // LOCAL
+
+    cin >> n >> m ;
+    for(int i = 0 ; i < n ; i++){
+        cin >> nodNode[i].x ;
+        cin >> nodNode[i].y ;
+    }
+
+    int temp ;
+    for(int i = 0 ; i < m ; i++){
+        cin >> temp ;
+        city[temp] = i ;
+    }
+    dfs_to_Maxn_path(temp);
+    dfs_to_other_path(Maxn_city , 0);
+    if(flag == 1 )
+        cout << "Yes" << '\n' << Maxn_path ;
+    else
+        cout << "NO";
+    return 0;
+}

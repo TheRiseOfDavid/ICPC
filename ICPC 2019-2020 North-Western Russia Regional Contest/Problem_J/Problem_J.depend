@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1590407398 source:c:\david\icpc\icpc 2019-2020 north-western russia regional contest\problem_j\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+

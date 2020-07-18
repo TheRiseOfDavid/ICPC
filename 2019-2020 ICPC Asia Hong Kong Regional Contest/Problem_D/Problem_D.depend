@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1593764491 source:c:\david\icpc\2019-2020 icpc asia hong kong regional contest\problem_d\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+

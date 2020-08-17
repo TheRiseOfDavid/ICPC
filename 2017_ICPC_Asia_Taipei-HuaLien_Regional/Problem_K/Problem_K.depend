@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1597590945 source:c:\david\icpc\2019-2020 icpc asia hong kong regional contest\problem_k\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+
+1597594577 source:c:\david\icpc\2017_icpc_asia_taipei-hualien_regional\problem_k\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+

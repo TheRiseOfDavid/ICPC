@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1602075432 source:c:\david\icpc\topc2020_pg\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1602068730 source:c:\david\icpc\topc2020_pe\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+	<ext/rope>
+

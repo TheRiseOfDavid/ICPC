@@ -1,59 +1,28 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #define LOCAL
+#define MAXN 30
 using namespace std;
-vector<int> path[30] ;
-deque<int> nodes ;
+int path[MAXN][MAXN] = {} ;
+int node[MAXN] = {} ;
+int n , p , N ;
 
-int N , n , p  ;
-
-struct Node{
-    int color[3] = {} ;
-    int use = 0 ;
-    void clear(){
-        color[0] = 0 ;
-        color[1] = 0 ;
-        color[2] = 0 ;
-        use = 0 ;
+int DFS(int v){
+    for(int i = 0 ; i < v ; i++){
+        if(path[v][i] && node[v] == node[i])
+            return false ;
     }
 
-}node[30];
+    if(n == v-1)
+        return true ;
 
-int choose(int i , int k ){
-    for(int j = 0 ; j < path[i].size() ; j++){
-        if(!node[path[i][j]].use){
-            nodes.push_back(path[i][j]);
-            node[path[i][j]].use = 1 ;
-        }
-
-        if(node[path[i][j]].color[k])
-            return 0 ;
+    for(int j = 0 ; j < 3 ; j++){
+        node[v+1] = j ;
+        if(DFS(v+1))
+            return true ;
     }
-    return 1 ;
-}
+    return false ;
 
-int check(int i ){
-    for(int k = 0 ; k < 3 ; k++){
-        if(node[i].color[k])
-            continue ;
-        if(choose(i,k)){
-            node[i].color[k] = 1 ;
-            return 1 ;
-        }
-    }
-    return 0 ;
-}
-
-int BFS(){
-    //node[0].color[0] = 1 ;
-    nodes.push_back(0) ;
-    node[0].use = 1 ;
-    while(nodes.size()){
-        if(!check(nodes.front()))
-            return 0 ;
-        nodes.pop_front();
-    }
-    return 1 ;
 }
 
 int main()
@@ -61,37 +30,26 @@ int main()
 #ifdef LOCAL
     freopen("in1.txt" , "r" , stdin );
 #endif // LOCAL
-    int i , j ;
+    int _i , _j ;
     cin >> N ;
     while(N--){
         cin >> n >> p ;
-
         //clear
         for(int i = 0 ; i < n ; i++){
-            path[i].clear() ;
-            node[i].clear() ;
-        }
-        nodes.clear() ;
-
-        //bulid
-        for(int k = 0 ; k < p ; k++){
-            cin >> i >> j ;
-            path[i].push_back(j) ;
-            path[j].push_back(i) ;
+            for(int j = 0 ; j < n ; j++)
+                path[i][j] = 0 ;
         }
 
-        if(BFS())
+        for(int i = 0 ; i < p ; i++ ){
+            cin >> _i >> _j ;
+            path[_i][_j] = 1 ;
+            path[_j][_i] = 1 ;
+        }
+        if(DFS(0))
             cout << "Y" ;
         else
             cout << "N" ;
         cout << '\n' ;
-
-        /*//debug
-        for(int i = 0 ; i < n ; i++){
-            cout << i << ' ' << node[i].color[0] << ' ' << node[i].color[1] << ' ' << node[i].color[2] << '\n' ;
-        }
-        */
-
     }
     return 0;
 }
